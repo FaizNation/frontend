@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api-ai/:match*",
+      "destination": "https://ai.unesa.web.id/:match*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
