@@ -3,8 +3,9 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import ProfileModal from '../ui/ProfileModal';
 import apiHidup from '../../assets/api/apiHidup.svg';
-import apiMati from '../../assets/api/apiMati.svg';
+import apiMati from '../../assets/api/apiMati.svg'; 
 import { getImageUrl } from '../../utils/api';
+import IconLogo from '../../assets/Icon.svg';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,7 +37,7 @@ const Navbar = () => {
             className="flex items-center gap-3 hover:opacity-80 transition-opacity shrink-0"
           >
             <img
-              src="src/assets/Icon.svg"
+              src={IconLogo}
               alt="Logo"
               className="w-8 h-8 sm:w-10 sm:h-10"
             />
@@ -179,15 +180,6 @@ const Navbar = () => {
                 <Link to="/dashboard" className="py-2.5 px-4 rounded-lg font-medium font-lexend text-[15px] text-[#3f4848] bg-white border border-[rgba(45,106,106,0.1)]" onClick={() => setMenuOpen(false)}>Beranda</Link>
                 <Link to="/groups" className="py-2.5 px-4 rounded-lg font-medium font-lexend text-[15px] text-[#3f4848]" onClick={() => setMenuOpen(false)}>Grup</Link>
                 <Link to="/challenges" className="py-2.5 px-4 rounded-lg font-medium font-lexend text-[15px] text-[#3f4848]" onClick={() => setMenuOpen(false)}>Tantangan</Link>
-                <button
-                  onClick={() => {
-                    setProfileModalOpen(true);
-                    setMenuOpen(false);
-                  }}
-                  className="text-left py-2.5 px-4 rounded-lg font-medium font-lexend text-[15px] text-[#3f4848]"
-                >
-                  Edit Profil
-                </button>
                 <button
                   onClick={handleLogout}
                   className="text-left py-2.5 px-4 rounded-lg font-medium font-lexend text-[15px] text-red-500 border border-red-100"

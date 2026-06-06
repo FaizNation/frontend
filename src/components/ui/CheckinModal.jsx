@@ -58,7 +58,7 @@ const CheckinModal = ({ isOpen, onClose, onSuccess }) => {
         {/* Modal Header */}
         <div className="px-8 pt-8 pb-4 flex justify-between items-start sticky top-0 bg-white z-10">
           <div className="text-center w-full">
-            <h1 className="font-manrope text-2xl sm:text-[32px] text-primary-container mb-2 font-bold">Bagaimana harimu hari ini?</h1>
+            <h1 className="font-manrope text-2xl sm:text-[32px] text-primary mb-2 font-bold">Bagaimana harimu hari ini?</h1>
             <p className="text-sm sm:text-base text-on-surface-variant max-w-md mx-auto">Refleksi singkat untuk keseimbangan mental Anda.</p>
           </div>
           <button 
@@ -84,13 +84,13 @@ const CheckinModal = ({ isOpen, onClose, onSuccess }) => {
               <h3 className="font-manrope font-semibold text-on-surface text-lg">Skor Kebahagiaan</h3>
             </div>
             <div className="space-y-4">
-              <div className="flex justify-between text-sm text-outline">
+              <div className="flex justify-between text-sm text-outline text-primary">
                 <span>Kurang baik</span>
                 <span className="text-primary font-bold text-xl">{formData.skor_kebahagiaan}</span>
                 <span>Luar biasa</span>
               </div>
               <input 
-                className="w-full h-2 bg-secondary-container rounded-lg appearance-none cursor-pointer accent-primary" 
+                className="w-full h-2 bg-secondary-fixed-dim rounded-lg appearance-none cursor-pointer accent-primary" 
                 max="10" 
                 min="1" 
                 step="1" 
@@ -115,7 +115,7 @@ const CheckinModal = ({ isOpen, onClose, onSuccess }) => {
                 <span className="text-on-surface-variant text-sm pb-1">jam</span>
               </div>
               <input 
-                className="w-full h-2 bg-secondary-container rounded-lg appearance-none cursor-pointer accent-primary" 
+                className="w-full h-2 bg-secondary-fixed-dim rounded-lg appearance-none cursor-pointer accent-primary" 
                 max="12" 
                 min="0" 
                 step="0.5" 
@@ -136,7 +136,7 @@ const CheckinModal = ({ isOpen, onClose, onSuccess }) => {
                 <span className="text-on-surface-variant text-sm pb-1">jam</span>
               </div>
               <input 
-                className="w-full h-2 bg-secondary-container rounded-lg appearance-none cursor-pointer accent-primary" 
+                className="w-full h-2 bg-secondary-fixed-dim rounded-lg appearance-none cursor-pointer accent-primary" 
                 max="12" 
                 min="0" 
                 step="0.5" 
@@ -178,13 +178,13 @@ const CheckinModal = ({ isOpen, onClose, onSuccess }) => {
                 <span className="material-symbols-outlined text-primary">groups</span>
                 <span className="font-semibold text-on-surface">Interaksi Sosial</span>
               </div>
-              <div className="flex justify-between text-xs text-outline mb-2">
+              <div className="flex justify-between text-primary text-xs text-outline mb-2">
                 <span>Minimal</span>
                 <span className="text-primary font-bold text-base">{formData.interaksi_sosial}</span>
                 <span>Sangat Aktif</span>
               </div>
               <input 
-                className="w-full h-2 bg-secondary-container rounded-lg appearance-none cursor-pointer accent-primary" 
+                className="w-full h-2 bg-secondary-fixed-dim rounded-lg appearance-none cursor-pointer accent-primary" 
                 max="10" 
                 min="1" 
                 step="1" 
@@ -203,7 +203,7 @@ const CheckinModal = ({ isOpen, onClose, onSuccess }) => {
                 <span className="text-on-surface-variant text-sm pb-1">jam</span>
               </div>
               <input 
-                className="w-full h-2 bg-secondary-container rounded-lg appearance-none cursor-pointer accent-primary" 
+                className="w-full h-2 bg-secondary-fixed-dim rounded-lg appearance-none cursor-pointer accent-primary" 
                 max="16" 
                 min="0" 
                 step="1" 
@@ -214,19 +214,14 @@ const CheckinModal = ({ isOpen, onClose, onSuccess }) => {
             </div>
           </div>
 
-          {/* Info Section */}
-          <div className="bg-secondary-container/20 rounded-xl p-6">
-            <h4 className="font-manrope font-bold text-primary text-base mb-2 text-primary-container">Mengapa ini penting?</h4>
-            <p className="text-sm text-on-secondary-container leading-relaxed">Penelitian menunjukkan bahwa melacak korelasi antara aktivitas fisik, waktu istirahat, dan suasana hati membantu mengidentifikasi pemicu stres lebih awal.</p>
-          </div>
         </div>
 
         {/* Modal Footer */}
         <div className="px-8 py-6 bg-surface-container-lowest border-t border-outline-variant/20 flex flex-col items-center gap-3 sticky bottom-0 z-10">
-          <div className="flex items-center gap-2 text-on-surface-variant text-xs">
+          {/* <div className="flex items-center gap-2 text-on-surface-variant text-xs">
             <span className="material-symbols-outlined text-primary-container text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
             <p>Data Anda aman dan terenkripsi secara pribadi.</p>
-          </div>
+          </div> */}
           <button 
             type="button"
             onClick={handleSubmit}

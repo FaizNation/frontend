@@ -1,3 +1,5 @@
+import IconLogo from '../../assets/Icon.svg';
+
 const Footer = () => {
   const links = [
     { label: 'Tentang Kami', href: '#' },
@@ -17,9 +19,16 @@ const Footer = () => {
       }}
     >
       <div className="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
-        {/* Brand */}
-        <div className="text-lg font-bold" style={{ color: '#2D6A6A' }}>
-          MindBalance
+        {/* Brand Group */}
+        <div className="flex items-center gap-3">
+          <img
+            src={IconLogo}
+            alt="Logo"
+            className="w-8 h-8 sm:w-10 sm:h-10"
+          />
+          <div className="text-lg font-bold" style={{ color: '#2D6A6A' }}>
+            MindBalance
+          </div>
         </div>
 
         {/* Navigation Links */}

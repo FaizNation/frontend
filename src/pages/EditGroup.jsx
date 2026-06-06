@@ -4,6 +4,7 @@ import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import groupService from '../services/groupService';
 import { useAuth } from '../context/AuthContext';
+import { getImageUrl } from '../utils/api';
 
 const EditGroup = () => {
   const { id } = useParams();
@@ -25,7 +26,7 @@ const EditGroup = () => {
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState('');
 
-  const categories = ['Mindfulness', 'Sleep', 'Anxiety', 'Depression', 'Work-Life Balance'];
+  const categories = ['Anxiety Support', 'Stress Management', 'Mindfulness', 'Grief & Loss', 'General Wellness'];
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -40,10 +41,10 @@ const EditGroup = () => {
             is_public: g.isPublic,
           });
           setRules(g.rules?.length > 0 ? g.rules.map(r => r.content || r) : ['']);
-          if (g.imageUrl) setPreviewUrl(g.imageUrl);
+          if (g.imageUrl) setPreviewUrl(getImageUrl(g.imageUrl));
           
           // Verify if user is admin (Owner)
-          const me = g.members.find(m => m.id === user.id);
+          const me = g.members?.find(m => m.id === user?.id);
           if (me?.role !== 'ADMIN') {
             alert('Hanya admin yang dapat mengedit grup ini.');
             navigate(`/groups/${id}`);
@@ -124,121 +125,121 @@ const EditGroup = () => {
   };
 
   if (authLoading || isFetching) return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#114B4B]"></div>
     </div>
   );
 
   if (!user) return null;
 
   return (
-    <div className="bg-[#F9FBFB] min-h-screen flex flex-col font-manrope">
+    <div className="bg-[#faf9f6] min-h-screen flex flex-col font-manrope">
       <Navbar />
 
-      <main className="flex-1 max-w-[800px] w-full mx-auto px-6 py-12 md:py-20">
-        <div className="mb-10 text-center">
-          <h1 className="text-3xl md:text-4xl font-black text-[#2D6A6A] mb-3 tracking-tight">Pengaturan Circle</h1>
-          <p className="text-on-surface-variant font-medium">Perbarui identitas dan aturan komunitas Anda.</p>
-        </div>
+      <main className="flex-1 w-full max-w-2xl mx-auto px-6 py-12 md:py-20 flex flex-col">
+        {/* Header Section */}
+        <header className="text-center mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#114B4B] mb-3 tracking-tight">Pengaturan Circle</h1>
+          <p className="text-gray-500 text-sm">Sesuaikan identitas, aturan, dan privasi komunitas Anda.</p>
+        </header>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-[32px] p-8 md:p-12 shadow-xl shadow-teal-900/5 border border-outline-variant/20 space-y-10 animate-fade-in">
+        {/* Form Container */}
+        <form onSubmit={handleSubmit} className="bg-white rounded-[24px] p-8 md:p-12 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05),0_8px_10px_-6px_rgba(0,0,0,0.05)] border border-gray-50 animate-fade-in space-y-10">
           {error && (
-            <div className="p-4 bg-red-50 text-red-500 text-sm rounded-2xl text-center font-bold border border-red-100">
+            <div className="p-4 bg-red-50 text-red-500 text-sm rounded-xl text-center border border-red-100">
               {error}
             </div>
           )}
 
-          {/* Section: Identitas */}
-          <div className="space-y-6">
-            <h2 className="text-lg font-black text-[#2D6A6A] flex items-center gap-2 uppercase tracking-widest text-[11px]">
-              <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary text-[10px]">1</span>
-              Identitas Circle
-            </h2>
+          {/* Section: Identitas Utama */}
+          <div className="space-y-8">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#114B4B]/10 flex items-center justify-center text-[#114B4B] font-bold text-sm">1</div>
+              <h2 className="text-xl font-bold text-[#114B4B]">Informasi Dasar</h2>
+            </div>
 
-            <div className="flex flex-col md:flex-row gap-8 items-start">
-              {/* Image Upload */}
-              <div className="w-full md:w-40 flex flex-col items-center gap-3">
+            <div className="space-y-6">
+              {/* Photo Edit */}
+              <div className="flex flex-col items-center justify-center py-4">
                 <div 
                   onClick={() => fileInputRef.current.click()}
-                  className="w-40 h-40 bg-[#F9FAFB] rounded-[32px] border-2 border-dashed border-outline-variant/50 flex flex-col items-center justify-center cursor-pointer overflow-hidden group hover:border-primary/50 transition-all"
+                  className="w-32 h-32 rounded-full border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden relative group cursor-pointer hover:border-[#114B4B]/50 transition-all"
                 >
                   {previewUrl ? (
-                    <img src={previewUrl} alt="Preview" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                  ) : (
                     <>
-                      <span className="material-symbols-outlined text-4xl text-outline-variant group-hover:text-primary transition-colors">add_photo_alternate</span>
-                      <span className="text-[10px] font-black text-outline-variant mt-2 group-hover:text-primary">GANTI FOTO</span>
+                       <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
+                       <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                         <span className="material-symbols-outlined text-white">edit</span>
+                       </div>
                     </>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-gray-400 gap-1">
+                      <span className="material-symbols-outlined text-2xl">add_a_photo</span>
+                      <span className="text-[10px] font-semibold text-center">Ganti<br/>Foto</span>
+                    </div>
                   )}
                 </div>
                 <input type="file" ref={fileInputRef} onChange={handleFileChange} accept="image/*" className="hidden" />
-                <p className="text-[10px] text-center text-outline-variant font-bold">Maks. 5MB (PNG/JPG)</p>
+                <p className="text-[10px] text-gray-400 font-bold mt-3 uppercase tracking-wider">Ketuk untuk mengubah foto</p>
               </div>
 
-              <div className="flex-1 w-full space-y-6">
-                <div className="space-y-1">
-                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-1">Nama Circle</label>
-                  <input 
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Cth: Mindful Jakarta"
-                    className="w-full px-5 py-4 bg-[#F9FAFB] border-none rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all font-bold text-on-surface"
-                    required
-                  />
-                </div>
+              <div className="space-y-2">
+                <label className="block text-xs font-semibold text-gray-700">Nama Circle</label>
+                <input 
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="e.g., Mindful Mornings Jakarta"
+                  className="w-full bg-[#f4f3f1] border-none rounded-lg p-4 text-sm focus:ring-1 focus:ring-[#114B4B] placeholder:text-gray-400 font-medium"
+                  required
+                />
+              </div>
 
-                <div className="space-y-1">
-                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-1">Kategori</label>
-                  <select 
-                    name="category"
-                    value={formData.category}
-                    onChange={handleChange}
-                    className="w-full px-5 py-4 bg-[#F9FAFB] border-none rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all font-bold text-on-surface appearance-none"
-                  >
-                    {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-                  </select>
+              <div className="space-y-2">
+                <label className="block text-xs font-semibold text-gray-700">Deskripsi</label>
+                <textarea 
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Ceritakan tujuan grup ini..."
+                  rows="4"
+                  className="w-full bg-[#f4f3f1] border-none rounded-lg p-4 text-sm focus:ring-1 focus:ring-[#114B4B] placeholder:text-gray-400 resize-none font-medium"
+                  required
+                />
+              </div>
+
+              <div className="space-y-3">
+                <label className="block text-xs font-semibold text-gray-700">Kategori</label>
+                <div className="flex flex-wrap gap-2">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, category: cat })}
+                      className={`px-4 py-2.5 rounded-full text-xs font-medium transition-all ${
+                        formData.category === cat 
+                          ? 'bg-[#114B4B] text-white shadow-sm' 
+                          : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
                 </div>
               </div>
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-1">Deskripsi Singkat</label>
-              <textarea 
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                placeholder="Ceritakan tentang apa circle ini..."
-                rows="4"
-                className="w-full px-5 py-4 bg-[#F9FAFB] border-none rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all font-medium text-on-surface resize-none"
-                required
-              />
             </div>
           </div>
 
+          <hr className="border-gray-100" />
+
           {/* Section: Privasi */}
-          <div className="space-y-6">
-            <h2 className="text-lg font-black text-[#2D6A6A] flex items-center gap-2 uppercase tracking-widest text-[11px]">
-              <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary text-[10px]">2</span>
-              Pengaturan Akses
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <label className="relative cursor-pointer group">
-                <input 
-                  type="radio" 
-                  name="is_public" 
-                  checked={formData.is_public === true} 
-                  onChange={() => setFormData({...formData, is_public: true})} 
-                  className="peer sr-only" 
-                />
-                <div className="p-6 bg-[#F9FAFB] border-2 border-transparent rounded-[24px] peer-checked:border-primary/20 peer-checked:bg-white peer-checked:shadow-sm transition-all h-full">
-                  <span className="material-symbols-outlined text-primary mb-3">public</span>
-                  <p className="font-black text-sm text-on-surface mb-1">Publik</p>
-                  <p className="text-[10px] text-on-surface-variant font-medium">Siapapun bisa menemukan dan bergabung dengan circle ini.</p>
-                </div>
-              </label>
-
+          <div className="space-y-8">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#114B4B]/10 flex items-center justify-center text-[#114B4B] font-bold text-sm">2</div>
+              <h2 className="text-xl font-bold text-[#114B4B]">Privasi & Akses</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <label className="relative cursor-pointer group">
                 <input 
                   type="radio" 
@@ -247,71 +248,93 @@ const EditGroup = () => {
                   onChange={() => setFormData({...formData, is_public: false})} 
                   className="peer sr-only" 
                 />
-                <div className="p-6 bg-[#F9FAFB] border-2 border-transparent rounded-[24px] peer-checked:border-amber-200 peer-checked:bg-white peer-checked:shadow-sm transition-all h-full">
-                  <span className="material-symbols-outlined text-amber-600 mb-3">lock</span>
-                  <p className="font-black text-sm text-on-surface mb-1">Privat</p>
-                  <p className="text-[10px] text-on-surface-variant font-medium">Hanya anggota yang memiliki kode unik yang bisa bergabung.</p>
+                <div className="p-6 bg-gray-50 border-2 border-transparent rounded-xl peer-checked:border-[#114B4B] peer-checked:bg-white peer-checked:shadow-sm transition-all h-full relative">
+                  <span className="material-symbols-outlined text-[#52b1b1] mb-2 text-2xl">lock</span>
+                  <p className="font-semibold text-gray-800 text-sm">Grup Privat</p>
+                  <p className="text-[10px] text-gray-500 mt-1">Hanya yang memiliki kode yang bisa bergabung.</p>
+                  {formData.is_public === false && (
+                    <div className="absolute top-3 right-3 w-5 h-5 bg-[#114B4B] rounded-full flex items-center justify-center">
+                      <span className="material-symbols-outlined text-white text-[12px] font-bold">check</span>
+                    </div>
+                  )}
+                </div>
+              </label>
+
+              <label className="relative cursor-pointer group">
+                <input 
+                  type="radio" 
+                  name="is_public" 
+                  checked={formData.is_public === true} 
+                  onChange={() => setFormData({...formData, is_public: true})} 
+                  className="peer sr-only" 
+                />
+                <div className="p-6 bg-gray-50 border-2 border-transparent rounded-xl peer-checked:border-[#114B4B] peer-checked:bg-white peer-checked:shadow-sm transition-all h-full relative">
+                  <span className="material-symbols-outlined text-gray-400 mb-2 text-2xl">public</span>
+                  <p className="font-semibold text-gray-800 text-sm">Grup Publik</p>
+                  <p className="text-[10px] text-gray-500 mt-1">Siapa saja bisa menemukan dan bergabung.</p>
+                  {formData.is_public === true && (
+                    <div className="absolute top-3 right-3 w-5 h-5 bg-[#114B4B] rounded-full flex items-center justify-center">
+                      <span className="material-symbols-outlined text-white text-[12px] font-bold">check</span>
+                    </div>
+                  )}
                 </div>
               </label>
             </div>
           </div>
 
-          {/* Section: Aturan */}
-          <div className="space-y-6">
-            <div className="flex justify-between items-center">
-              <h2 className="text-lg font-black text-[#2D6A6A] flex items-center gap-2 uppercase tracking-widest text-[11px]">
-                <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary text-[10px]">3</span>
-                Aturan Circle (Opsional)
-              </h2>
-              <button 
-                type="button" 
-                onClick={addRule}
-                className="text-[10px] font-black text-primary hover:underline flex items-center gap-1"
-              >
-                <span className="material-symbols-outlined text-xs">add_circle</span> TAMBAH
-              </button>
-            </div>
+          <hr className="border-gray-100" />
 
+          {/* Section: Aturan */}
+          <div className="space-y-8">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#114B4B]/10 flex items-center justify-center text-[#114B4B] font-bold text-sm">3</div>
+              <h2 className="text-xl font-bold text-[#114B4B]">Aturan Komunitas</h2>
+            </div>
+            
             <div className="space-y-3">
               {rules.map((rule, index) => (
-                <div key={index} className="flex gap-3">
+                <div key={index} className="flex gap-2 items-center bg-[#f4f3f1] p-2 rounded-lg">
+                  <span className="material-symbols-outlined text-gray-400 text-sm px-2">drag_indicator</span>
                   <input 
                     value={rule}
                     onChange={(e) => handleRuleChange(index, e.target.value)}
                     placeholder={`Aturan #${index + 1}`}
-                    className="flex-1 px-5 py-3 bg-[#F9FAFB] border-none rounded-xl focus:ring-1 focus:ring-primary outline-none transition-all text-sm font-medium"
+                    className="flex-1 bg-transparent border-none text-sm focus:ring-0 outline-none p-0 text-gray-700 font-medium"
                   />
                   {rules.length > 1 && (
-                    <button type="button" onClick={() => removeRule(index)} className="text-red-400 hover:text-red-600">
-                      <span className="material-symbols-outlined">delete</span>
+                    <button type="button" onClick={() => removeRule(index)} className="text-gray-400 hover:text-red-500 p-2">
+                      <span className="material-symbols-outlined text-sm">close</span>
                     </button>
                   )}
                 </div>
               ))}
             </div>
+            <button 
+              type="button" 
+              onClick={addRule}
+              className="text-sm font-semibold text-[#114B4B] hover:underline flex items-center gap-1 mt-2"
+            >
+              <span className="material-symbols-outlined text-sm">add</span> Tambah Aturan Lainnya
+            </button>
           </div>
 
-          <div className="pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-2 text-on-surface-variant text-[10px] font-bold opacity-60">
-              <span className="material-symbols-outlined text-sm">info</span>
-              Perubahan privasi akan memengaruhi cara user bergabung.
-            </div>
-            <div className="flex gap-4 w-full md:w-auto">
-              <button 
-                type="button" 
-                onClick={() => navigate(`/groups/${id}`)}
-                className="flex-1 md:flex-none px-10 py-4 border border-outline-variant text-outline font-black text-xs rounded-2xl hover:bg-gray-50 transition-all"
-              >
-                BATAL
-              </button>
-              <button 
-                type="submit" 
-                disabled={isLoading}
-                className="flex-1 md:flex-none px-12 py-4 bg-primary text-white font-black text-xs rounded-2xl shadow-xl shadow-primary/20 hover:opacity-90 active:scale-95 transition-all disabled:opacity-70"
-              >
-                {isLoading ? 'MENYIMPAN...' : 'SIMPAN PERUBAHAN'}
-              </button>
-            </div>
+          {/* Actions */}
+          <div className="pt-10 border-t border-gray-100 flex flex-col sm:flex-row justify-center gap-3">
+            <button 
+              type="button" 
+              onClick={() => navigate(`/groups/${id}`)}
+              className="px-8 py-3 bg-white border border-gray-300 text-gray-600 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors w-full sm:w-1/2"
+            >
+              Batal
+            </button>
+            <button 
+              type="submit" 
+              disabled={isLoading}
+              className="px-8 py-3 bg-[#114B4B] text-white rounded-xl text-sm font-bold hover:bg-[#0a2e2e] transition-all flex items-center justify-center gap-2 w-full sm:w-1/2 disabled:opacity-70 shadow-lg shadow-[#114B4B]/20"
+            >
+              {isLoading ? 'Menyimpan...' : 'Simpan Perubahan'} 
+              {!isLoading && <span className="material-symbols-outlined text-sm font-bold">check_circle</span>}
+            </button>
           </div>
         </form>
       </main>

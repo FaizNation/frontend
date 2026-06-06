@@ -1,7 +1,14 @@
 import axios from 'axios';
 
-// Ensure no trailing slash
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:4000').replace(/\/+$/, '');
+const getBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl && envUrl.trim() !== "") {
+    return envUrl.replace(/\/+$/, '');
+  }
+  return 'http://localhost:4000';
+};
+
+const API_BASE_URL = getBaseUrl();
 
 const api = axios.create({
   baseURL: API_BASE_URL,

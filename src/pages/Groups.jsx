@@ -4,6 +4,7 @@ import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import groupService from '../services/groupService';
 import { useAuth } from '../context/AuthContext';
+import { getImageUrl } from '../utils/api';
 
 const Groups = () => {
   const { user, loading: authLoading } = useAuth();
@@ -126,8 +127,8 @@ const Groups = () => {
           joinedGroups.length > 0 ? (
             <div className="max-w-[1200px] w-full mx-auto px-6 py-12 md:py-16 animate-fade-in">
               <header className="mb-12">
-                <h1 className="text-3xl md:text-4xl text-[#1A3333] mb-4 font-semibold tracking-tight">Circle Saya</h1>
-                <p className="text-sm md:text-base text-gray-500 max-w-2xl leading-relaxed">
+                <h1 className="font-manrope text-4xl text-primary mb-1 font-bold">Circle Saya</h1>
+                <p className="ttext-lg text-on-surface-variant">
                   Tempat aman untuk berbagi, bertumbuh, dan menemukan ketenangan bersama komunitas pilihan Anda.
                 </p>
               </header>
@@ -147,7 +148,7 @@ const Groups = () => {
                         {/* Circular Image */}
                         <div className="w-16 h-16 rounded-full overflow-hidden bg-emerald-50 flex items-center justify-center shrink-0">
                           {group.imageUrl ? (
-                            <img src={group.imageUrl} alt={group.name} className="w-full h-full object-cover" />
+                            <img src={getImageUrl(group.imageUrl)} alt={group.name} className="w-full h-full object-cover" />
                           ) : (
                             <span className="material-symbols-outlined text-3xl text-emerald-600/50">
                               {group.category === 'Mindfulness' ? 'spa' : 'groups'}
@@ -303,8 +304,12 @@ const Groups = () => {
                     className="group bg-white rounded-3xl p-6 border border-surface-variant shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full animate-fade-in"
                   >
                     <div className="flex justify-between items-start mb-6">
-                      <div className="w-14 h-14 rounded-2xl bg-secondary-fixed-dim flex items-center justify-center text-on-secondary-container">
-                        <span className="material-symbols-outlined text-[32px]">{group.category === 'Mindfulness' ? 'spa' : 'groups'}</span>
+                      <div className="w-16 h-16 rounded-full border-4 border-white bg-emerald-50 flex items-center justify-center overflow-hidden shadow-sm shrink-0">
+                        {group.imageUrl ? (
+                            <img src={getImageUrl(group.imageUrl)} alt={group.name} className="w-full h-full object-cover" />
+                          ) : (
+                            <span className="material-symbols-outlined text-[32px]">{group.category === 'Mindfulness' ? 'spa' : 'groups'}</span>
+                          )}
                       </div>
                       {isJoined && (
                         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 font-bold text-[10px] border border-emerald-100">

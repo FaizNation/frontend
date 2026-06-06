@@ -85,7 +85,6 @@ const ProfileModal = ({ isOpen, onClose, user, onUpdate }) => {
         <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center bg-[#f5f7f5]">
           <div>
             <h2 className="text-xl font-bold text-primary font-manrope">Edit Profil</h2>
-            <p className="text-xs text-on-surface-variant/60">Perbarui identitas publik Anda</p>
           </div>
           <button 
             onClick={onClose}
@@ -136,11 +135,21 @@ const ProfileModal = ({ isOpen, onClose, user, onUpdate }) => {
               label="Nama Lengkap"
               id="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+                setError('');
+              }}
               placeholder="Masukkan nama lengkap"
+              error={error && error.toLowerCase().includes('nama') ? error : ''}
               required
             />
           </div>
+
+          {error && !error.toLowerCase().includes('nama') && (
+            <div className="p-3 bg-red-50 border border-red-100 text-red-500 text-xs rounded-xl text-center font-medium animate-in slide-in-from-top-1">
+              {error}
+            </div>
+          )}
 
           <div className="flex gap-3 mt-4">
             <Button 

@@ -3,6 +3,7 @@ import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import dashboardService from '../services/dashboardService';
 import { useAuth } from '../context/AuthContext';
+import BadgeCard from '../components/ui/BadgeCard';
 
 const Challenges = () => {
   const { user, loading } = useAuth();
@@ -20,7 +21,8 @@ const Challenges = () => {
           setBadges(response.data);
         }
       } catch (err) {
-        setError(err.response?.data?.message || 'Gagal memuat daftar lencana.');
+        console.error('Failed to fetch badges:', err);
+        setError('Gagal memuat daftar lencana.');
       } finally {
         setIsLoading(false);
       }
@@ -73,46 +75,7 @@ const Challenges = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {badges.map((badge) => (
-                  <div 
-                    key={badge.id} 
-                    className={`flex flex-col p-6 rounded-2xl border transition-all duration-300 ${
-                      badge.isUnlocked 
-                        ? 'bg-white border-primary/20 shadow-md hover:shadow-xl hover:-translate-y-1' 
-                        : 'bg-surface-container-low border-outline-variant/20 opacity-75 grayscale-[0.5]'
-                    }`}
-                  >
-                    <div className="flex justify-between items-start mb-4">
-                      <div className={`p-4 rounded-2xl flex-shrink-0 ${badge.isUnlocked ? 'bg-secondary-container text-secondary' : 'bg-surface-variant text-outline'}`}>
-                        {badge.iconUrl ? (
-                          <img src={badge.iconUrl} alt={badge.name} className="w-10 h-10 object-contain" />
-                        ) : (
-                          <span className="material-symbols-outlined text-4xl" style={badge.isUnlocked ? { fontVariationSettings: "'FILL' 1" } : {}}>
-                            {badge.name.toLowerCase().includes('mula') ? 'workspace_premium' : badge.name.toLowerCase().includes('hari') ? 'local_fire_department' : 'military_tech'}
-                          </span>
-                        )}
-                      </div>
-                      {!badge.isUnlocked && (
-                        <div className="bg-gray-100 p-1.5 rounded-full" title="Terkunci">
-                          <span className="material-symbols-outlined text-outline text-sm">lock</span>
-                        </div>
-                      )}
-                    </div>
-                    
-                    <h3 className="font-manrope font-bold text-on-surface text-lg mb-2">{badge.name}</h3>
-                    <p className="text-sm text-on-surface-variant mb-4 flex-1">{badge.description}</p>
-                    
-                    <div className="pt-4 border-t border-outline-variant/10">
-                      <p className="text-[10px] text-outline font-bold uppercase tracking-widest mb-1">Syarat</p>
-                      <p className="text-xs font-semibold text-on-surface">{badge.criteria}</p>
-                    </div>
-                    
-                    {badge.isUnlocked && badge.unlockedAt && (
-                      <div className="mt-4 flex items-center gap-2 text-primary font-bold text-xs bg-primary/5 px-3 py-2 rounded-xl w-max">
-                        <span className="material-symbols-outlined text-sm">check_circle</span>
-                        Diraih: {new Date(badge.unlockedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
-                      </div>
-                    )}
-                  </div>
+                  <BadgeCard key={badge.id} badge={badge} variant="full" />
                 ))}
                 
                 {badges.length === 0 && !isLoading && !error && (

@@ -1,9 +1,31 @@
-<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M47.5 40H20C15.8579 40 12.5 36.6421 12.5 32.5C12.5 28.3579 15.8579 25 20 25C20 25 20.2526 25 20.6125 25.0456C21.7337 19.3871 26.7455 15 32.5 15C39.4036 15 45 20.5964 45 27.5C45 27.5938 44.9989 27.6873 44.9967 27.7806C49.5298 28.2917 53 32.115 53 36.875C53 42.0527 48.8027 46.25 43.625 46.25C42.2443 46.25 40.9332 45.95 39.7523 45.412" fill="#FDB813"/>
-<path d="M25 2.5V7.5" stroke="#FDB813" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M37.5 5V10" stroke="#FDB813" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12.5 12.5L17.5 17.5" stroke="#FDB813" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M50 15L45 20" stroke="#FDB813" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M2.5 27.5H7.5" stroke="#FDB813" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M55 30H60" stroke="#FDB813" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="167" height="193" viewBox="0 0 167 193" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_300_1179)">
+<rect x="33" y="64" width="70" height="65" rx="32.5" fill="#FACC15" fill-opacity="0.2"/>
+</g>
+<g filter="url(#filter1_dd_300_1179)">
+<path d="M46.3333 127.333C42.6667 127.333 39.5278 126.028 36.9167 123.417C34.3056 120.806 33 117.667 33 114C33 110.333 34.3056 107.194 36.9167 104.583C39.5278 101.972 42.6667 100.667 46.3333 100.667C49 100.667 51.4583 101.389 53.7083 102.833C55.9583 104.278 57.5833 106.25 58.5833 108.75L59.4167 110.667H61.4167C63.75 110.667 65.7083 111.472 67.2917 113.083C68.875 114.694 69.6667 116.667 69.6667 119C69.6667 121.333 68.8611 123.306 67.25 124.917C65.6389 126.528 63.6667 127.333 61.3333 127.333H46.3333ZM76.25 118C76.0278 114.5 74.7639 111.472 72.4583 108.917C70.1528 106.361 67.25 104.778 63.75 104.167C62.0278 101.167 59.7083 98.7917 56.7917 97.0417C53.875 95.2917 50.6667 94.2778 47.1667 94C48.6111 89.9444 51.0833 86.7083 54.5833 84.2917C58.0833 81.875 62 80.6667 66.3333 80.6667C71.8889 80.6667 76.6111 82.6111 80.5 86.5C84.3889 90.3889 86.3333 95.1111 86.3333 100.667C86.3333 104.278 85.4444 107.625 83.6667 110.708C81.8889 113.792 79.4167 116.222 76.25 118ZM63 77.3333V64H69.6667V77.3333H63ZM85.1667 86.5L80.5 81.8333L89.8333 72.3333L94.5833 77.0833L85.1667 86.5ZM89.6667 104V97.3333H103V104H89.6667ZM89.8333 129L80.5 119.5L85.1667 114.833L94.6667 124.167L89.8333 129ZM47.5 86.5L38.0833 77.0833L42.8333 72.3333L52.1667 81.8333L47.5 86.5Z" fill="#EAB308"/>
+</g>
+<defs>
+<filter id="filter0_f_300_1179" x="-31" y="0" width="198" height="193" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="32" result="effect1_foregroundBlur_300_1179"/>
+</filter>
+<filter id="filter1_dd_300_1179" x="25" y="64" width="86" height="83" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="10"/>
+<feGaussianBlur stdDeviation="4"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_300_1179"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="1.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="effect1_dropShadow_300_1179" result="effect2_dropShadow_300_1179"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_300_1179" result="shape"/>
+</filter>
+</defs>
 </svg>
