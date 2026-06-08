@@ -81,8 +81,8 @@ const Login = () => {
             <div className="text-primary/60 mb-6 inline-flex items-center justify-center p-3 bg-primary/5 rounded-full">
               <span className="material-symbols-outlined text-[32px]">spa</span>
             </div>
-            <h1 className="font-manrope text-4xl text-on-surface mb-2 font-black tracking-tight">Selamat Datang</h1>
-            <p className="font-lexend text-on-surface-variant text-sm">Masuk untuk melanjutkan perjalanan tenang Anda</p>
+            <h1 className="font-family-lexend font-bold text-4xl text-on-surface mb-2 tracking-tight">Selamat Datang</h1>
+            <p className="font-family-manrope font-light text-on-surface-variant text-sm">Masuk untuk melanjutkan perjalanan tenang Anda</p>
           </div>
 
           {generalError && (
@@ -91,7 +91,7 @@ const Login = () => {
             </div>
           )}
 
-          <form className="flex flex-col gap-6" onSubmit={handleSubmit} noValidate>
+          <form className="flex flex-col gap-6 font-family-manrope" onSubmit={handleSubmit} noValidate>
             <Input
               label="Email"
               id="email"
@@ -111,11 +111,6 @@ const Login = () => {
                 onChange={handleChange}
                 error={fieldErrors.password}
               />
-              {!fieldErrors.password && (
-                <div className="flex justify-end px-1 mt-1">
-                  <a href="#" className="text-[11px] font-bold text-primary hover:underline underline-offset-4 transition-all">Lupa Kata Sandi?</a>
-                </div>
-              )}
             </div>
 
             <Button type="submit" className="mt-4 w-full py-4 rounded-2xl text-xs font-black tracking-widest uppercase shadow-xl shadow-primary/10" disabled={isLoading}>
@@ -125,11 +120,11 @@ const Login = () => {
           </form>
 
           <div className="mt-12 text-center pt-6 border-t border-outline-variant/40">
-            <p className="font-lexend text-on-surface-variant text-sm font-medium">
+            <p className="font-family-lexend text-on-surface-variant text-sm font-medium">
               Belum punya akun?{' '}
               <Link
                 to="/register"
-                className="font-lexend text-primary hover:text-surface-tint font-bold underline-offset-4 hover:underline transition-colors duration-300 ml-1"
+                className="font-family-lexend text-primary hover:text-surface-tint font-bold underline-offset-4 hover:underline transition-colors duration-300 ml-1"
               >
                 Daftar di sini
               </Link>

@@ -1,6 +1,10 @@
+import { getImageUrl } from '../../utils/api';
+
 const BadgeCard = ({ badge, variant = 'compact' }) => {
-  const isUnlocked = badge.isUnlocked !== undefined ? badge.isUnlocked : true; // Fallback for summary data which only returns unlocked
+  const isUnlocked = badge.isUnlocked !== undefined ? badge.isUnlocked : true; 
   
+  const displayImage = badge.imageUrl || badge.iconUrl;
+
   const getIcon = (name) => {
     const n = name.toLowerCase();
     if (n.includes('mula')) return 'workspace_premium';
@@ -12,11 +16,21 @@ const BadgeCard = ({ badge, variant = 'compact' }) => {
   if (variant === 'compact') {
     // Styling for Dashboard (Recent Badges)
     return (
-      <div className="flex flex-col items-center p-4 bg-secondary-container rounded-xl text-center shadow-sm border border-primary/5">
-        <span className="material-symbols-outlined text-3xl text-secondary mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>
-          {getIcon(badge.name)}
-        </span>
-        <span className="text-[11px] text-on-secondary-container font-bold leading-tight line-clamp-1">{badge.name}</span>
+      <div className="flex flex-col items-center p-4 bg-secondary-container rounded-xl text-center shadow-sm border border-primary/5 h-full">
+        <div className="w-12 h-12 flex items-center justify-center mb-2">
+          {displayImage ? (
+            <img 
+              src={getImageUrl(displayImage)} 
+              alt={badge.name} 
+              className={`w-full h-full object-contain ${!isUnlocked ? 'grayscale' : ''}`} 
+            />
+          ) : (
+            <span className="material-symbols-outlined text-3xl text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>
+              {getIcon(badge.name)}
+            </span>
+          )}
+        </div>
+        <span className="text-[10px] text-on-secondary-container font-bold leading-tight line-clamp-2">{badge.name}</span>
       </div>
     );
   }
@@ -31,9 +45,13 @@ const BadgeCard = ({ badge, variant = 'compact' }) => {
       }`}
     >
       <div className="flex justify-between items-start mb-4">
-        <div className={`p-4 rounded-2xl flex-shrink-0 ${isUnlocked ? 'bg-secondary-container text-secondary' : 'bg-surface-variant text-outline'}`}>
-          {badge.iconUrl ? (
-            <img src={badge.iconUrl} alt={badge.name} className="w-10 h-10 object-contain" />
+        <div className={`rounded-full flex-shrink-0 ${isUnlocked ? 'bg-secondary-container text-secondary' : 'bg-surface-variant text-outline'}`}>
+          {displayImage ? (
+            <img 
+              src={getImageUrl(displayImage)} 
+              alt={badge.name} 
+              className="w-20 h-20 object-contain" 
+            />
           ) : (
             <span className="material-symbols-outlined text-4xl" style={isUnlocked ? { fontVariationSettings: "'FILL' 1" } : {}}>
               {getIcon(badge.name)}

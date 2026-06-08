@@ -2,8 +2,8 @@ const WelcomeHeader = ({ name, hasCheckedInToday, onCheckinClick }) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
       <div>
-        <h1 className="font-manrope text-4xl text-primary mb-1 font-bold">Halo, {name?.split(' ')[0]}.</h1>
-        <p className="text-lg text-on-surface-variant">Bagaimana perasaanmu hari ini? Mari luangkan waktu sejenak untuk evaluasi.</p>
+        <h1 className="font-family-lexend text-4xl text-primary mb-1 font-bold">Halo, {name?.split(' ')[0]}.</h1>
+        <p className="text-lg font-family-manrope text-on-surface-variant">Bagaimana perasaanmu hari ini? Mari luangkan waktu sejenak untuk evaluasi.</p>
       </div>
       <button 
         onClick={() => !hasCheckedInToday && onCheckinClick()}

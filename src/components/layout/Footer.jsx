@@ -1,11 +1,11 @@
+import { Link } from 'react-router-dom';
 import IconLogo from '../../assets/Icon.svg';
 
 const Footer = () => {
   const links = [
-    { label: 'Tentang Kami', href: '#' },
-    { label: 'Kebijakan Privasi', href: '#' },
-    { label: 'Kontak Darurat', href: '#' },
-    { label: 'Pusat Bantuan', href: '#' },
+    { label: 'Tentang Kami', href: '/about' },
+    { label: 'Kebijakan Privasi', href: '/privacy' },
+    { label: 'Pusat Bantuan', href: '/help' },
   ];
 
   return (
@@ -34,16 +34,16 @@ const Footer = () => {
         {/* Navigation Links */}
         <div className="flex flex-wrap justify-center gap-6">
           {links.map((link) => (
-            <a
+            <Link
               key={link.label}
-              href={link.href}
+              to={link.href}
               className="underline-offset-4 hover:underline transition-all duration-300 ease-in-out"
               style={{ color: '#64748b' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#2D6A6A')}
               onMouseLeave={(e) => (e.currentTarget.style.color = '#64748b')}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 

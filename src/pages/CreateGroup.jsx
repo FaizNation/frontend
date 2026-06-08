@@ -158,30 +158,30 @@ const CreateGroup = () => {
               <h2 className="text-xl font-semibold text-[#114B4B] mb-6">Step 1: Basic Info</h2>
               
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-gray-700">Circle Name</label>
+                <label className="block text-xs font-semibold text-gray-700">Nama Circle</label>
                 <input 
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="e.g., Mindful Mornings Jakarta"
+                  placeholder="Misalnya, Mindful Mornings Jakarta"
                   className="w-full bg-[#f4f3f1] border-none rounded-lg p-4 text-sm focus:ring-1 focus:ring-[#114B4B] placeholder:text-gray-400"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-gray-700">Description</label>
+                <label className="block text-xs font-semibold text-gray-700">Deskripsi</label>
                 <textarea 
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  placeholder="What is the purpose of this circle? Who is it for?"
+                  placeholder="Apa tujuan dari circle ini? Untuk siapa circle ini?"
                   rows="4"
                   className="w-full bg-[#f4f3f1] border-none rounded-lg p-4 text-sm focus:ring-1 focus:ring-[#114B4B] placeholder:text-gray-400 resize-none"
                 />
               </div>
 
               <div className="space-y-3">
-                <label className="block text-xs font-semibold text-gray-700">Category (Select one)</label>
+                <label className="block text-xs font-semibold text-gray-700">Kategori (Pilih satu)</label>
                 <div className="flex flex-wrap gap-2">
                   {categories.map((cat) => (
                     <button
@@ -213,7 +213,7 @@ const CreateGroup = () => {
                   onClick={nextStep}
                   className="px-8 py-2.5 bg-[#114B4B] text-white rounded-lg text-sm font-medium hover:bg-[#0a2e2e] transition-colors flex items-center justify-center gap-2 w-1/2"
                 >
-                  Next <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  Selanjutnya <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </button>
               </div>
             </div>
@@ -275,7 +275,7 @@ const CreateGroup = () => {
                       <input 
                         value={rule}
                         onChange={(e) => handleRuleChange(index, e.target.value)}
-                        placeholder={`e.g., Jaga kerahasiaan cerita anggota lain.`}
+                        placeholder={`Misalnya, Jaga kerahasiaan cerita anggota lain.`}
                         className="flex-1 bg-transparent border-none text-sm focus:ring-0 outline-none p-0 text-gray-700"
                       />
                       {rules.length > 1 && (
@@ -308,7 +308,7 @@ const CreateGroup = () => {
                   onClick={nextStep}
                   className="px-8 py-2.5 bg-[#114B4B] text-white rounded-lg text-sm font-medium hover:bg-[#0a2e2e] transition-colors flex items-center justify-center gap-2 w-1/2"
                 >
-                  Next <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  Selanjutnya <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </button>
               </div>
             </div>

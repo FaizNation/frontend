@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import ProfileModal from '../ui/ProfileModal';
+import ConfirmationModal from '../ui/ConfirmationModal';
 import apiHidup from '../../assets/api/apiHidup.svg';
 import apiMati from '../../assets/api/apiMati.svg'; 
 import { getImageUrl } from '../../utils/api';
@@ -11,13 +12,14 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
   const { user, logout, updateProfile, streakData } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogout = async () => {
     await logout();
-    setProfileOpen(false);
+    setLogoutModalOpen(false);
     navigate('/login');
   };
 
@@ -51,21 +53,21 @@ const Navbar = () => {
             <nav className="hidden md:flex items-center gap-8">
               <Link
                 to="/dashboard"
-                className={`text-sm font-medium transition-colors relative py-1 ${isActive('/dashboard') ? 'text-primary' : 'text-[#3f4848] hover:text-primary'}`}
+                className={`text-sm font-semibold transition-colors relative py-1 ${isActive('/dashboard') ? 'text-primary' : 'text-[#3f4848] hover:text-primary'}`}
               >
                 Beranda
                 {isActive('/dashboard') && <span className="absolute bottom-[-8px] left-0 right-0 h-0.5 bg-primary rounded-full"></span>}
               </Link>
               <Link
                 to="/groups"
-                className={`text-sm font-medium transition-colors relative py-1 ${isActive('/groups') ? 'text-primary' : 'text-[#3f4848] hover:text-primary'}`}
+                className={`text-sm font-semibold transition-colors relative py-1 ${isActive('/groups') ? 'text-primary' : 'text-[#3f4848] hover:text-primary'}`}
               >
                 Grup
                 {isActive('/groups') && <span className="absolute bottom-[-8px] left-0 right-0 h-0.5 bg-primary rounded-full"></span>}
               </Link>
               <Link
                 to="/challenges"
-                className={`text-sm font-medium transition-colors relative py-1 ${isActive('/challenges') ? 'text-primary' : 'text-[#3f4848] hover:text-primary'}`}
+                className={`text-sm font-semibold transition-colors relative py-1 ${isActive('/challenges') ? 'text-primary' : 'text-[#3f4848] hover:text-primary'}`}
               >
                 Tantangan
                 {isActive('/challenges') && <span className="absolute bottom-[-8px] left-0 right-0 h-0.5 bg-primary rounded-full"></span>}
@@ -122,14 +124,17 @@ const Navbar = () => {
                           setProfileModalOpen(true);
                           setProfileOpen(false);
                         }}
-                        className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#3f4848] hover:bg-[#f4f3f1] font-lexend"
+                        className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#3f4848] hover:bg-[#f4f3f1] font-manrope"
                       >
                         <span className="material-symbols-outlined text-lg">person</span>
                         Edit Profil
                       </button>
                       <button
-                        onClick={handleLogout}
-                        className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-red-50 font-lexend"
+                        onClick={() => {
+                          setLogoutModalOpen(true);
+                          setProfileOpen(false);
+                        }}
+                        className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-red-50 font-manrope"
                       >
                         <span className="material-symbols-outlined text-lg">logout</span>
                         Keluar
@@ -142,14 +147,14 @@ const Navbar = () => {
               <div className="hidden sm:flex items-center gap-4">
                 <Link
                   to="/login"
-                  className="transition-colors duration-200 font-lexend text-[15px] font-medium text-[#3f4848] hover:text-primary"
+                  className="transition-colors duration-200 font-manrope text-[15px] font-medium text-[#3f4848] hover:text-primary"
                 >
                   Masuk
                 </Link>
 
                 <Link
                   to="/register"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-lg transition duration-300 ease-in-out hover:-translate-y-0.5 bg-primary text-[#abe8e7] font-lexend text-[14px] font-medium tracking-[0.02em] shadow-[0_4px_14px_0_rgba(45,106,106,0.35)] hover:shadow-[0_6px_20px_rgba(45,106,106,0.25)]"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-lg transition duration-300 ease-in-out hover:-translate-y-0.5 bg-primary text-[#abe8e7] font-manrope text-[14px] font-medium tracking-[0.02em] shadow-[0_4px_14px_0_rgba(45,106,106,0.35)] hover:shadow-[0_6px_20px_rgba(45,106,106,0.25)]"
                 >
                   Mulai Gratis
                   <span className="material-symbols-outlined text-[18px]">
@@ -177,12 +182,15 @@ const Navbar = () => {
           <div className="sm:hidden border-t px-4 py-4 flex flex-col gap-3 bg-[#f5f7f5] border-[rgba(45,106,106,0.1)]">
             {user ? (
               <>
-                <Link to="/dashboard" className="py-2.5 px-4 rounded-lg font-medium font-lexend text-[15px] text-[#3f4848] bg-white border border-[rgba(45,106,106,0.1)]" onClick={() => setMenuOpen(false)}>Beranda</Link>
-                <Link to="/groups" className="py-2.5 px-4 rounded-lg font-medium font-lexend text-[15px] text-[#3f4848]" onClick={() => setMenuOpen(false)}>Grup</Link>
-                <Link to="/challenges" className="py-2.5 px-4 rounded-lg font-medium font-lexend text-[15px] text-[#3f4848]" onClick={() => setMenuOpen(false)}>Tantangan</Link>
+                <Link to="/dashboard" className="py-2.5 px-4 rounded-lg font-medium font-manrope text-[15px] text-[#3f4848] bg-white border border-[rgba(45,106,106,0.1)]" onClick={() => setMenuOpen(false)}>Beranda</Link>
+                <Link to="/groups" className="py-2.5 px-4 rounded-lg font-medium font-manrope text-[15px] text-[#3f4848]" onClick={() => setMenuOpen(false)}>Grup</Link>
+                <Link to="/challenges" className="py-2.5 px-4 rounded-lg font-medium font-manrope text-[15px] text-[#3f4848]" onClick={() => setMenuOpen(false)}>Tantangan</Link>
                 <button
-                  onClick={handleLogout}
-                  className="text-left py-2.5 px-4 rounded-lg font-medium font-lexend text-[15px] text-red-500 border border-red-100"
+                  onClick={() => {
+                    setLogoutModalOpen(true);
+                    setMenuOpen(false);
+                  }}
+                  className="text-left py-2.5 px-4 rounded-lg font-medium font-manrope text-[15px] text-red-500 border border-red-100"
                 >
                   Keluar
                 </button>
@@ -191,14 +199,14 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="text-center py-2.5 rounded-lg font-medium transition-colors duration-200 font-lexend text-[15px] text-[#3f4848] border border-[rgba(45,106,106,0.2)]"
+                  className="text-center py-2.5 rounded-lg font-medium transition-colors duration-200 font-manrope text-[15px] text-[#3f4848] border border-[rgba(45,106,106,0.2)]"
                   onClick={() => setMenuOpen(false)}
                 >
                   Masuk
                 </Link>
                 <Link
                   to="/register"
-                  className="flex items-center justify-center gap-2 py-2.5 rounded-lg bg-primary text-[#abe8e7] font-lexend text-[14px] font-medium"
+                  className="flex items-center justify-center gap-2 py-2.5 rounded-lg bg-primary text-[#abe8e7] font-manrope text-[14px] font-medium"
                   onClick={() => setMenuOpen(false)}
                 >
                   Mulai Gratis
@@ -218,6 +226,17 @@ const Navbar = () => {
         onClose={() => setProfileModalOpen(false)}
         user={user}
         onUpdate={handleProfileUpdate}
+      />
+
+      <ConfirmationModal 
+        isOpen={logoutModalOpen}
+        onClose={() => setLogoutModalOpen(false)}
+        onConfirm={handleLogout}
+        title="Keluar dari Akun?"
+        message="Apakah Anda yakin ingin keluar? Anda perlu masuk kembali untuk mengakses fitur MindBalance."
+        confirmText="Ya, Keluar"
+        cancelText="Tetap Disini"
+        variant="danger"
       />
     </>
   );

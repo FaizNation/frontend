@@ -12,11 +12,11 @@ const Groups = () => {
   const [discoverGroups, setDiscoverGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [viewMode, setViewMode] = useState('joined'); // Default to 'joined'
-  
+
   // Search & Filter State (for discover mode)
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Semua');
-  
+
   // Join by Code state
   const [inviteCode, setInviteCode] = useState('');
   const [isJoining, setIsJoining] = useState(false);
@@ -123,7 +123,6 @@ const Groups = () => {
 
       <main className="flex-grow flex flex-col">
         {viewMode === 'joined' ? (
-          /* JOINED GROUPS VIEW (Figma Matched) */
           joinedGroups.length > 0 ? (
             <div className="max-w-[1200px] w-full mx-auto px-6 py-12 md:py-16 animate-fade-in">
               <header className="mb-12">
@@ -140,7 +139,7 @@ const Groups = () => {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {joinedGroups.map((group) => (
-                    <div 
+                    <div
                       key={group.id}
                       className="bg-white rounded-[24px] p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-50 hover:shadow-lg transition-all duration-300 flex flex-col h-full group"
                     >
@@ -170,11 +169,11 @@ const Groups = () => {
                       </div>
 
                       {/* Full Width Button */}
-                      <Link 
+                      <Link
                         to={`/groups/${group.id}`}
                         className="w-full py-4 bg-[#114B4B] text-white text-center rounded-xl font-medium text-sm hover:bg-[#0A3838] transition-colors mt-auto"
                       >
-                        Masuk Grup
+                        Masuk circle
                       </Link>
                     </div>
                   ))}
@@ -185,7 +184,7 @@ const Groups = () => {
               {!isLoading && joinedGroups.length > 0 && (
                 <div className="mt-24 flex justify-between items-center pt-8 border-t border-gray-100">
                   <h2 className="text-xl font-semibold text-[#1A3333]">Temukan Grup Lain</h2>
-                  <button 
+                  <button
                     onClick={() => setViewMode('discover')}
                     className="text-sm font-semibold text-[#2D6A6A] hover:underline flex items-center gap-1 group"
                   >
@@ -201,7 +200,7 @@ const Groups = () => {
               <h1 className="text-3xl md:text-4xl font-semibold text-[#2D6A6A] mb-8 max-w-2xl leading-tight">
                 Anda Belum Bergabung dengan Circle Manapun
               </h1>
-              <button 
+              <button
                 onClick={() => setViewMode('discover')}
                 className="group flex items-center gap-3 text-xl font-medium text-[#2D6A6A] hover:opacity-80 transition-all"
               >
@@ -224,24 +223,24 @@ const Groups = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
               <div className="md:col-span-2 bg-white rounded-3xl p-8 border border-surface-variant relative overflow-hidden flex flex-col justify-center shadow-sm">
                 <div className="absolute -right-20 -top-20 w-64 h-64 bg-primary-fixed/10 rounded-full blur-3xl pointer-events-none"></div>
-                
+
                 <div className="flex justify-between items-start mb-2 relative z-10">
                   <div>
                     <h2 className="text-2xl font-bold text-on-surface">Explore Circle</h2>
                     <p className="text-sm text-on-surface-variant font-medium">Cari berdasarkan topik atau feeling.</p>
                   </div>
-                  <Link 
+                  <Link
                     to="/groups/create"
                     className="bg-[#0c5252] text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 hover:opacity-90 transition-all shadow-sm"
                   >
                     <span className="material-symbols-outlined text-sm">add</span>
-                    Create Circle
+                    Buat Circle
                   </Link>
                 </div>
 
                 <div className="relative z-10 mb-6 mt-4">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">search</span>
-                  <input 
+                  <input
                     type="text"
                     placeholder="Cari..."
                     value={search}
@@ -273,21 +272,21 @@ const Groups = () => {
                 </div>
                 <div className="flex flex-col gap-3">
                   <div className="relative">
-                    <input 
+                    <input
                       type="text"
-                      placeholder="ENTER CODE"
+                      placeholder="MASUKKAN KODE"
                       value={inviteCode}
-                      onChange={(e) => {setInviteCode(e.target.value.toUpperCase()); setJoinError('');}}
+                      onChange={(e) => { setInviteCode(e.target.value.toUpperCase()); setJoinError(''); }}
                       className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/50 text-center tracking-widest uppercase font-bold text-sm outline-none focus:border-white"
                     />
                   </div>
                   {joinError && <p className="text-[10px] text-red-200 font-bold text-center">{joinError}</p>}
-                  <button 
+                  <button
                     onClick={handleJoinByCode}
                     disabled={isJoining || !inviteCode.trim()}
                     className="w-full py-3 bg-white text-[#49453F] font-bold text-xs rounded-xl hover:shadow-md transition-all disabled:opacity-50"
                   >
-                    Join Group
+                    Gabung Circle
                   </button>
                 </div>
               </div>
@@ -298,18 +297,18 @@ const Groups = () => {
               {discoverGroups.map((group) => {
                 const isJoined = joinedGroups.some(jg => jg.id === group.id);
                 return (
-                  <Link 
-                    to={`/groups/${group.id}`} 
+                  <Link
+                    to={`/groups/${group.id}`}
                     key={group.id}
                     className="group bg-white rounded-3xl p-6 border border-surface-variant shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full animate-fade-in"
                   >
                     <div className="flex justify-between items-start mb-6">
                       <div className="w-16 h-16 rounded-full border-4 border-white bg-emerald-50 flex items-center justify-center overflow-hidden shadow-sm shrink-0">
                         {group.imageUrl ? (
-                            <img src={getImageUrl(group.imageUrl)} alt={group.name} className="w-full h-full object-cover" />
-                          ) : (
-                            <span className="material-symbols-outlined text-[32px]">{group.category === 'Mindfulness' ? 'spa' : 'groups'}</span>
-                          )}
+                          <img src={getImageUrl(group.imageUrl)} alt={group.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <span className="material-symbols-outlined text-[32px]">{group.category === 'Mindfulness' ? 'spa' : 'groups'}</span>
+                        )}
                       </div>
                       {isJoined && (
                         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 font-bold text-[10px] border border-emerald-100">
@@ -326,7 +325,7 @@ const Groups = () => {
                         {group.category}
                       </div>
                       {!isJoined && (
-                        <button 
+                        <button
                           onClick={(e) => handleQuickJoin(e, group.id)}
                           className="w-10 h-10 rounded-full bg-surface-container hover:bg-primary hover:text-white text-on-surface-variant flex items-center justify-center transition-all"
                         >

@@ -1,4 +1,4 @@
-const GroupAdminPanel = ({ group, onPrivacyChange }) => {
+const GroupAdminPanel = ({ group, onPrivacyChange, onCopySuccess }) => {
   return (
     <section className="bg-[#F8FAFC] border border-gray-100 p-8 rounded-3xl shadow-sm">
       <h2 className="text-xl font-bold text-[#114B4B] mb-6 flex items-center gap-2">
@@ -18,7 +18,7 @@ const GroupAdminPanel = ({ group, onPrivacyChange }) => {
               <button 
                 onClick={() => {
                   navigator.clipboard.writeText(group.inviteCode);
-                  alert('Kode berhasil disalin!');
+                  if (onCopySuccess) onCopySuccess();
                 }}
                 className="text-gray-400 hover:text-[#114B4B] transition-colors"
               >

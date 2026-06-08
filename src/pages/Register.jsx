@@ -101,17 +101,17 @@ const Register = () => {
     <div className="bg-[#faf9f6] min-h-screen flex flex-col items-center justify-start pt-16 px-4 font-lexend antialiased">
       {/* Header Section */}
       <header className="text-center mb-10">
-        <h1 className="text-3xl font-black text-[#2D6A6A] mb-2 font-manrope">Mulai Perjalanan Anda</h1>
-        <p className="text-on-surface-variant/70 text-sm font-medium">Bergabung dengan komunitas kami untuk mendapatkan akses penuh</p>
+        <h1 className="text-3xl font-family-lexend font-black text-[#2D6A6A] mb-2">Mulai Perjalanan Anda</h1>
+        <p className="text-on-surface-variant/70 text-sm font-family-manrope font-medium">Bergabung dengan komunitas kami untuk mendapatkan akses penuh</p>
       </header>
 
       {/* Progress Tracker */}
       <div className="w-full max-w-md mb-8">
         <div className="flex justify-between items-center mb-3 px-1">
-          <div className={`text-[10px] font-black uppercase tracking-widest ${step >= 1 ? 'text-[#2D6A6A]' : 'text-outline/40'}`}>
+          <div className={`text-[10px] font-family-lexend font-black uppercase tracking-widest ${step >= 1 ? 'text-[#2D6A6A]' : 'text-outline/40'}`}>
             Buat Akun
           </div>
-          <div className={`text-[10px] font-black uppercase tracking-widest ${step >= 2 ? 'text-[#2D6A6A]' : 'text-outline/40'}`}>
+          <div className={`text-[10px] font-family-lexend font-black uppercase tracking-widest ${step >= 2 ? 'text-[#2D6A6A]' : 'text-outline/40'}`}>
             Tentang Kamu
           </div>
         </div>
@@ -123,7 +123,7 @@ const Register = () => {
 
       {/* Form Container */}
       <main className="w-full max-w-2xl bg-white rounded-3xl p-8 md:p-12 shadow-[0_32px_64px_-16px_rgba(45,106,106,0.06)] border border-white/50 mb-10">
-        <h2 className="text-xl font-black text-[#2D6A6A] mb-8 font-manrope flex items-center gap-3">
+        <h2 className="text-xl font-family-lexend font-black text-[#2D6A6A] mb-8 flex items-center gap-3">
           <span className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-sm">{step}</span>
           {step === 1 ? 'Buat Akun' : 'Tentang Kamu'}
         </h2>
@@ -136,7 +136,7 @@ const Register = () => {
 
         {step === 1 ? (
           /* Step 1: Account Creation */
-          <form onSubmit={nextStep} className="space-y-6" noValidate>
+          <form onSubmit={nextStep} className="space-y-6 font-family-manrope" noValidate>
             <Input 
               label="Nama Lengkap" 
               id="name" 
@@ -169,8 +169,8 @@ const Register = () => {
             />
 
             <div className="flex items-center space-x-2 py-2 px-1">
-              <span className="material-symbols-outlined text-outline/40 text-lg">verified_user</span>
-              <span className="text-[11px] text-outline-variant font-bold">Privasi dan keamanan Anda adalah prioritas utama kami.</span>
+              <span className="text-tertiary-container material-symbols-outlined text-outline/40 text-lg">verified_user</span>
+              <span className="text-[11px] text-tertiary-container font-bold">Privasi dan keamanan Anda adalah prioritas utama kami.</span>
             </div>
 
             <div className="border-t border-gray-50 pt-8 mt-4 flex justify-end items-center gap-4">
@@ -185,7 +185,7 @@ const Register = () => {
                 type="submit"
                 className="px-10 py-3.5 bg-[#2D6A6A] text-white font-black text-xs rounded-2xl hover:opacity-90 active:scale-95 transition-all flex items-center gap-2 shadow-xl shadow-primary/10 uppercase tracking-widest"
               >
-                Next 
+                Selanjutnya 
                 <span className="material-symbols-outlined text-sm font-bold">arrow_forward</span>
               </button>
             </div>
@@ -207,7 +207,7 @@ const Register = () => {
                   />
                   <div className="flex flex-col items-center justify-center p-6 border-2 border-transparent bg-surface-container-low rounded-2xl transition-all peer-checked:border-primary/20 peer-checked:bg-white peer-checked:shadow-md">
                     <svg className="w-10 h-10 text-on-surface-variant mb-2 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><circle cx="10" cy="14" r="5"></circle><path d="M14 10l7-7m0 0h-6m6 0v6"></path></svg>
-                    <span className="text-xs font-black text-on-surface uppercase tracking-widest">Laki-laki</span>
+                    <span className="text-xs font-family-lexend font-black text-on-surface uppercase">Laki-laki</span>
                   </div>
                 </label>
                 <label className="relative cursor-pointer group">
@@ -221,7 +221,7 @@ const Register = () => {
                   />
                   <div className="flex flex-col items-center justify-center p-6 border-2 border-transparent bg-surface-container-low rounded-2xl transition-all peer-checked:border-primary/20 peer-checked:bg-white peer-checked:shadow-md">
                     <svg className="w-10 h-10 text-on-surface-variant mb-2 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"></circle><path d="M12 14v7m-3-3h6"></path></svg>
-                    <span className="text-xs font-black text-on-surface uppercase tracking-widest">Perempuan</span>
+                    <span className="text-xs font-family-lexend font-black text-on-surface uppercase">Perempuan</span>
                   </div>
                 </label>
               </div>
@@ -245,23 +245,23 @@ const Register = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-center gap-2 text-[10px] text-outline-variant font-bold uppercase tracking-tight opacity-60">
-              <span className="material-symbols-outlined text-xs">verified_user</span>
-              <p>Privasi dan keamanan Anda adalah prioritas utama kami.</p>
+            <div className="flex items-center space-x-2 py-2 px-1">
+              <span className="text-tertiary-container material-symbols-outlined text-outline/40 text-lg">verified_user</span>
+              <span className="text-[11px] text-tertiary-container font-bold">Privasi dan keamanan Anda adalah prioritas utama kami.</span>
             </div>
 
             <div className="border-t border-gray-50 pt-8 mt-4 flex justify-end items-center gap-4">
               <button 
                 type="button"
                 onClick={prevStep}
-                className="px-8 py-3 text-outline font-black text-xs uppercase tracking-widest hover:text-primary transition-colors"
+                className="px-8 py-3 font-family-lexend text-outline font-black text-xs uppercase tracking-widest hover:text-primary transition-colors"
               >
                 Kembali
               </button>
               <button 
                 type="submit"
                 disabled={isLoading}
-                className="px-10 py-3.5 bg-[#2D6A6A] text-white font-black text-xs rounded-2xl hover:opacity-90 active:scale-95 transition-all flex items-center gap-2 shadow-xl shadow-primary/10 uppercase tracking-widest disabled:opacity-70"
+                className="px-10 py-3.5 bg-[#2D6A6A] font-family-lexend text-white font-black text-xs rounded-2xl hover:opacity-90 active:scale-95 transition-all flex items-center gap-2 shadow-xl shadow-primary/10 uppercase tracking-widest disabled:opacity-70"
               >
                 {isLoading ? (
                   <>
@@ -274,7 +274,7 @@ const Register = () => {
                 ) : (
                   <>
                     Daftar Sekarang
-                    <span className="material-symbols-outlined text-sm font-bold">done_all</span>
+                    <span className="material-symbols-outlined text-sm font-bold">done</span>
                   </>
                 )}
               </button>
@@ -284,8 +284,8 @@ const Register = () => {
 
         {/* Footer Link */}
         <div className="mt-10 text-center text-sm border-t border-gray-50 pt-8">
-          <span className="text-on-surface-variant font-medium">Sudah punya akun?</span>
-          <Link to="/login" className="text-[#2D6A6A] font-black hover:underline ml-2 transition-all">Masuk di sini</Link>
+          <span className="text-on-surface-variant font-family-lexend font-medium">Sudah punya akun?</span>
+          <Link to="/login" className="text-[#2D6A6A] font-family-lexend font-black hover:underline ml-2 transition-all">Masuk di sini</Link>
         </div>
       </main>
     </div>

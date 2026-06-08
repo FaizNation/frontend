@@ -5,6 +5,10 @@ import Footer from '../components/layout/Footer';
 import groupService from '../services/groupService';
 import { useAuth } from '../context/AuthContext';
 
+// UI Components
+import ConfirmationModal from '../components/ui/ConfirmationModal';
+import SuccessModal from '../components/ui/SuccessModal';
+
 // Refactored Sub-components
 import GroupHeader from '../components/groups/GroupHeader';
 import GroupAbout from '../components/groups/GroupAbout';
@@ -22,7 +26,13 @@ const GroupDetail = () => {
   const [isJoining, setIsJoining] = useState(false);
   const [error, setError] = useState('');
   const [report, setReport] = useState(null);
-  const [activeTab, setActiveTab] = useState('tentang'); // 'tentang' or 'laporan'
+  const [activeTab, setActiveTab] = useState('tentang'); 
+
+  // Modal States
+  const [leaveModalOpen, setLeaveModalOpen] = useState(false);
+  const [kickModalOpen, setKickModalOpen] = useState(false);
+  const [selectedMember, setSelectedMember] = useState(null);
+  const [successModal, setSuccessModal] = useState({ open: false, title: '', message: '' });
 
   const fetchGroupDetail = useCallback(async () => {
     setIsLoading(true);
@@ -68,10 +78,10 @@ const GroupDetail = () => {
   };
 
   const handleLeaveGroup = async () => {
-    if (!window.confirm('Apakah Anda yakin ingin keluar dari grup ini?')) return;
     try {
       const response = await groupService.removeMember(id, user.id);
       if (response.success) {
+        setLeaveModalOpen(false);
         navigate('/groups');
       }
     } catch (err) {
@@ -79,15 +89,17 @@ const GroupDetail = () => {
     }
   };
 
-  const handleKickMember = async (memberId, memberName) => {
-    if (!window.confirm(`Apakah Anda yakin ingin mengeluarkan ${memberName} dari grup ini?`)) return;
+  const handleKickMember = async () => {
+    if (!selectedMember) return;
     try {
-      const response = await groupService.removeMember(id, memberId);
+      const response = await groupService.removeMember(id, selectedMember.id);
       if (response.success) {
+        setKickModalOpen(false);
+        setSelectedMember(null);
         await fetchGroupDetail();
       }
     } catch (err) {
-      alert(err.response?.data?.message || `Gagal mengeluarkan ${memberName}.`);
+      alert(err.response?.data?.message || `Gagal mengeluarkan member.`);
     }
   };
 
@@ -148,6 +160,39 @@ const GroupDetail = () => {
           onSettingsClick={() => navigate(`/groups/${id}/edit`)} 
         />
 
+        {/* Feedback Modals */}
+        <SuccessModal 
+          isOpen={successModal.open}
+          onClose={() => setSuccessModal({ ...successModal, open: false })}
+          title={successModal.title}
+          message={successModal.message}
+        />
+
+        <ConfirmationModal 
+          isOpen={leaveModalOpen}
+          onClose={() => setLeaveModalOpen(false)}
+          onConfirm={handleLeaveGroup}
+          title="Keluar dari Grup?"
+          message={`Apakah Anda yakin ingin keluar dari ${group.name}? Anda memerlukan undangan baru jika ingin bergabung kembali nanti.`}
+          confirmText="Ya, Keluar"
+          cancelText="Batal"
+          variant="danger"
+        />
+
+        <ConfirmationModal 
+          isOpen={kickModalOpen}
+          onClose={() => {
+            setKickModalOpen(false);
+            setSelectedMember(null);
+          }}
+          onConfirm={handleKickMember}
+          title="Keluarkan Anggota?"
+          message={selectedMember ? `Apakah Anda yakin ingin mengeluarkan ${selectedMember.name} dari grup ini?` : ''}
+          confirmText="Ya, Keluarkan"
+          cancelText="Batal"
+          variant="danger"
+        />
+
         {/* Tabs */}
         {isMember && (
           <div className="flex gap-8 border-b border-gray-200 mb-8 animate-fade-in">
@@ -176,7 +221,17 @@ const GroupDetail = () => {
           <div className="lg:col-span-2 space-y-8 animate-fade-in">
             {activeTab === 'tentang' ? (
               <>
-                {isAdmin && <GroupAdminPanel group={group} onPrivacyChange={handlePrivacyChange} />}
+                {isAdmin && (
+                  <GroupAdminPanel 
+                    group={group} 
+                    onPrivacyChange={handlePrivacyChange} 
+                    onCopySuccess={() => setSuccessModal({ 
+                      open: true, 
+                      title: 'Kode Berhasil Disalin!', 
+                      message: 'Bagikan kode ini untuk mengundang teman Anda.' 
+                    })}
+                  />
+                )}
                 <GroupAbout group={group} />
                 <GroupRules rules={group.rules} />
               </>
@@ -191,8 +246,11 @@ const GroupDetail = () => {
                members={group.members} 
                isAdmin={isAdmin} 
                currentUserId={user.id} 
-               onKick={handleKickMember} 
-               onLeave={handleLeaveGroup}
+               onKick={(id, name) => {
+                 setSelectedMember({ id, name });
+                 setKickModalOpen(true);
+               }} 
+               onLeave={() => setLeaveModalOpen(true)}
                isMember={isMember}
              />
           </div>

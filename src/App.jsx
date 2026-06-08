@@ -8,6 +8,9 @@ import Groups from './pages/Groups';
 import GroupDetail from './pages/GroupDetail';
 import CreateGroup from './pages/CreateGroup';
 import EditGroup from './pages/EditGroup';
+import About from './pages/About';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import HelpCenter from './pages/HelpCenter';
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/help" element={<HelpCenter />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/challenges" element={<Challenges />} />
       <Route path="/groups" element={<Groups />} />
